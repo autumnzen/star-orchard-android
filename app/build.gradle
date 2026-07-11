@@ -1,0 +1,16 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.starorchard.platform"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.starorchard.platform"
+        minSdk 23
+        targetSdk 34
+        versionCode 29
+        versionName "1.0.28"
+    }
+}
