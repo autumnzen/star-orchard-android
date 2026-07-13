@@ -35,3 +35,12 @@ For ADB install:
 ```powershell
 adb install --no-streaming -r .\star-orchard-debug.apk
 ```
+
+## GitHub Package
+
+The APK is also published as a GHCR package:
+
+```text
+ghcr.io/autumnzen/star-orchard-android:1.0.44
+ghcr.io/autumnzen/star-orchard-android:latest
+```
