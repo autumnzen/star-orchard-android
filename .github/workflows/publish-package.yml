@@ -1,0 +1,42 @@
+name: Publish Package
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-ghcr-package:
+    name: Publish APK Package To GHCR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log In To GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build And Push APK Package
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: package/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/star-orchard-android:1.0.44
+            ghcr.io/${{ github.repository_owner }}/star-orchard-android:latest
+          labels: |
+            org.opencontainers.image.title=Star Orchard Android
+            org.opencontainers.image.description=APK distribution package for Star Orchard Android.
+            org.opencontainers.image.version=1.0.44
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}

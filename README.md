@@ -16,6 +16,12 @@ Start with:
 docs/wiki/Home.md
 ```
 
+## Release And Package
+
+- Release: https://github.com/autumnzen/star-orchard-android/releases/tag/v1.0.44
+- APK asset: `star-orchard-debug.apk`
+- GitHub Package: `ghcr.io/autumnzen/star-orchard-android:1.0.44`
+
 ## Build
 
 This project includes a lightweight PowerShell build script that uses the
