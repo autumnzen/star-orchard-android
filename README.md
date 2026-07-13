@@ -2,6 +2,20 @@
 
 Android WebView package for the Star Orchard platform game.
 
+## Documentation
+
+Project wiki pages are maintained in:
+
+```text
+docs/wiki/
+```
+
+Start with:
+
+```text
+docs/wiki/Home.md
+```
+
 ## Build
 
 This project includes a lightweight PowerShell build script that uses the
