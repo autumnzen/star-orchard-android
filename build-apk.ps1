@@ -42,6 +42,14 @@ New-Item -ItemType Directory -Force -Path $build | Out-Null
 
 $manifest = Join-Path $build 'AndroidManifest.xml'
 $manifestText = Get-Content -LiteralPath (Join-Path $app 'AndroidManifest.xml') -Raw
+$gradleText = Get-Content -LiteralPath (Join-Path $project 'app\build.gradle') -Raw
+$versionCode = [regex]::Match($gradleText, 'versionCode\s+(\d+)').Groups[1].Value
+$versionName = [regex]::Match($gradleText, 'versionName\s+"([^"]+)"').Groups[1].Value
+if (-not $versionCode -or -not $versionName) {
+    throw "Could not read versionCode/versionName from app\build.gradle"
+}
+$manifestText = $manifestText -replace 'android:versionCode="\d+"', "android:versionCode=`"$versionCode`""
+$manifestText = $manifestText -replace 'android:versionName="[^"]+"', "android:versionName=`"$versionName`""
 if ($manifestText -notmatch '\spackage=') {
     $manifestText = $manifestText -replace '(<manifest\s+xmlns:android="http://schemas.android.com/apk/res/android")', '$1 package="com.starorchard.platform"'
 }
